@@ -12,6 +12,6 @@ namespace Games.Core.Interfaces
 
         Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate);
 
-        Task<T> GetItemAsync(int id);
+        Task<T> GetItemAsync(Guid id);
     }
 }

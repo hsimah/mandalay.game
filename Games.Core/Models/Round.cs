@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Games.Core.Interfaces;
+using Newtonsoft.Json;
 
 namespace Games.Core.Models
 {
     public class Round : IModel
     {
-        public int Id { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        public Guid Id { get; set; }
+        [JsonProperty(PropertyName = "timestamp")]
         public DateTime Timestamp { get; set; }
-        public int WinnerId { get; set; }
-        public Player Winner { get => Players.Single(p => p.Id == WinnerId); }
+        [JsonProperty(PropertyName = "winner")]
+        public Player Winner { get; set; }
+        [JsonIgnore]
         public IEnumerable<Player> Players { get; set; }
+        [JsonProperty(PropertyName = "wildcard")]
+        public Card Wildcard { get; set; }
     }
 }

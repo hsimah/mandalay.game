@@ -1,7 +1,9 @@
-﻿namespace Games.Core.Interfaces
+﻿using System;
+
+namespace Games.Core.Interfaces
 {
     public interface IModel
     {
-        int Id { get; set; }
+        Guid Id { get; set; }
     }
 }
