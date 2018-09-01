@@ -1,0 +1,67 @@
+[
+    {
+        "id": "27ac54c8-bd42-4617-ae90-013ea879a636",
+        "rank": "2",
+        "value": 0
+    },
+    {
+        "id": "b3b937df-4a4b-4ea5-b46f-13567b1bdb53",
+        "rank": "3",
+        "value": 0
+    },
+    {
+        "id": "27906e97-78ec-4c3b-9966-9b836935bd54",
+        "rank": "4",
+        "value": 0
+    },
+    {
+        "id": "35adb64a-a2a9-420f-a87e-92110bdd78bb",
+        "rank": "5",
+        "value": 0
+    },
+    {
+        "id": "4180e962-1559-461a-846e-ada8af7b055e",
+        "rank": "6",
+        "value": 0
+    },
+    {
+        "id": "9c366454-451d-477a-bbd7-f8f9dc1ef715",
+        "rank": "7",
+        "value": 0
+    },
+    {
+        "id": "3000fd3a-f4be-4c46-9315-1c0744bd5b8f",
+        "rank": "8",
+        "value": 0
+    },
+    {
+        "id": "b8dc8971-c64e-4107-b28a-7f6a470d0b23",
+        "rank": "9",
+        "value": 0
+    },
+    {
+        "id": "b01755df-2bd4-43b5-acc9-33d452c5a4aa",
+        "rank": "10",
+        "value": 10
+    },
+    {
+        "id": "ea84d46b-ccc7-4466-abb3-96ddf2c7b509",
+        "rank": "Jack",
+        "value": 2
+    },
+    {
+        "id": "27ad9277-a910-4691-aca0-9ac0b7f2b737",
+        "rank": "Queen",
+        "value": 3
+    },
+    {
+        "id": "1b8e6448-231c-405a-b6f5-ef8834078f42",
+        "rank": "King",
+        "value": 4
+    },
+    {
+        "id": "d6771b2c-61f1-4835-80dc-c59a90962bec",
+        "rank": "Ace",
+        "value": 11
+    }
+]
