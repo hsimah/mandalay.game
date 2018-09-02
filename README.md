@@ -4,6 +4,11 @@ Mandalay programming assignment - simple card game
 
 * Clone this repository and checkout `master` branch.
 * Ensure you have the Cosmos DB emulator installed and running (or have an Azure instance).
+* Add local API key to your `Games.Web` user secrets.
+
+`{
+  "AuthKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
+}`
 * Run `Setup\Seed.ps1` or import `Setup\cards.json` into your Cosmos DB instance.
   * Database ID `gamedb`.
   * Collection ID `cards` (other collections created by API as necessary).
