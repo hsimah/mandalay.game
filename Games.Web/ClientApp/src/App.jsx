@@ -8,6 +8,9 @@ import Layout from './components/Layout';
 import Loading from './components/Loading';
 
 class App extends React.Component {
+    state = {
+        error: false
+    }
     componentDidMount() {
         const { getCards } = this.props;
         // app ready, get cards
@@ -23,9 +26,13 @@ class App extends React.Component {
         // save round in history
         if (winner && !prevWinner) saveGame();
     }
+    componentDidCatch() {
+        this.setState({ error: true });
+    }
     render() {
         const { cardsLoading, error } = this.props;
-        if (error) return <Error />;
+        const { error: internalError } = this.state;
+        if (error || internalError) return <Error />;
         if (cardsLoading) return <Loading />;
         return <Layout />;
     }

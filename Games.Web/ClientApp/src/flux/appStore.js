@@ -54,10 +54,16 @@ export const actions = {
             wildcard,
             timestamp: new Date().toUTCString()
         };
-        axios.post('/api/round', round);
-        dispatch({
-            type: sendRound
-        });
+        try {
+            axios.post('/api/round', round);
+            dispatch({
+                type: sendRound
+            });
+        } catch (error) {
+            dispatch({
+                type: handleError
+            });
+        }
     }
 };
 
