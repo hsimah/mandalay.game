@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { actions } from './flux';
+import Error from './components/Error';
 import Layout from './components/Layout';
+import Loading from './components/Loading';
 
 class App extends React.Component {
     componentDidMount() {
@@ -22,13 +24,18 @@ class App extends React.Component {
         if (winner && !prevWinner) saveGame();
     }
     render() {
+        const { cardsLoading, error } = this.props;
+        if (error) return <Error />;
+        if (cardsLoading) return <Loading />;
         return <Layout />;
     }
 }
 
 export default connect(
     state => ({
+        cardsLoading: state.app.cardsLoading,
         deal: state.game.deal,
+        error: state.app.error,
         winner: state.game.winner
     }),
     dispatch => bindActionCreators(actions, dispatch)

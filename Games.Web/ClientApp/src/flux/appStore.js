@@ -2,6 +2,7 @@
 const requestCards = 'REQUEST_CARDS';
 const receiveCards = 'RECEIVE_CARDS';
 const sendRound = 'SEND_ROUND';
+const handleError = 'HANDLE_ERROR';
 
 const initialState = {
     deck: [],
@@ -28,14 +29,21 @@ const buildDeck = cards => {
 
 export const actions = {
     getCards: () => async (dispatch, getState) => {
-        const { cardsLoaded, cardsLoading } = getState();
+        const { app } = getState();
+        const { cardsLoaded, cardsLoading } = app;
         if (cardsLoaded || cardsLoading) return;
         dispatch({ type: requestCards });
-        const { data } = await axios('/api/card');
-        dispatch({
-            type: receiveCards,
-            deck: buildDeck(data)
-        });
+        try {
+            const { data } = await axios('/api/card');
+            dispatch({
+                type: receiveCards,
+                deck: buildDeck(data)
+            });
+        } catch (error) {
+            dispatch({
+                type: handleError
+            });
+        }
     },
     saveGame: () => async (dispatch, getState) => {
         const { game } = getState();
@@ -61,14 +69,21 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 cardsLoading: true,
-                cardsLoaded: false
+                cardsLoaded: false,
+                error: false
+            };
+        case handleError:
+            return {
+                ...initialState,
+                error: true
             };
         case receiveCards:
             return {
                 ...state,
                 deck: action.deck,
                 cardsLoading: false,
-                cardsLoaded: true
+                cardsLoaded: true,
+                error: false
             };
         default:
             return state;

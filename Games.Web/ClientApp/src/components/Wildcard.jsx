@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import PlayingCard from './PlayingCard';
 import { cardShape } from '../util';
 
-const Wildcard = props => <div style={{ display: 'inline-block' }}>
-    <Typography component='p'>
+const Wildcard = props => <div>
+    <Typography gutterBottom component='p'>
         {props.card.suit ? `The current wild suit is ${props.card.suit}.` : 'Start game to draw a wildcard.'}
     </Typography>
-    <PlayingCard rank={props.card.rank} suit={props.card.suit} scale={0.8} />
+    {Object.keys(props.card).length ? <PlayingCard rank={props.card.rank} suit={props.card.suit} /> : <PlayingCard back />}
 </div>;
 Wildcard.propTypes = {
     card: PropTypes.shape(cardShape)

@@ -22,7 +22,8 @@ const styles = theme => ({
         zIndex: theme.zIndex.drawer + 1
     },
     drawerPaper: {
-        position: 'relative'
+        position: 'relative',
+        width: 240
     },
     content: {
         height: 'auto',
