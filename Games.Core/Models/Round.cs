@@ -13,7 +13,7 @@ namespace Games.Core.Models
         public DateTime Timestamp { get; set; }
         [JsonProperty(PropertyName = "winner")]
         public Player Winner { get; set; }
-        [JsonIgnore]
+        [JsonProperty(PropertyName = "players")]
         public IEnumerable<Player> Players { get; set; }
         [JsonProperty(PropertyName = "wildcard")]
         public Card Wildcard { get; set; }

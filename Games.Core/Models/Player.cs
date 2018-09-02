@@ -5,7 +5,7 @@ namespace Games.Core.Models
 {
     public class Player
     {
-        [JsonIgnore]
+        [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
