@@ -6,6 +6,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import Input from './Input';
+import Table from './Table';
+import Wildcard from './Wildcard';
+import Winner from './Winner';
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -17,8 +22,7 @@ const styles = theme => ({
         zIndex: theme.zIndex.drawer + 1
     },
     drawerPaper: {
-        position: 'relative',
-        width: '25em'
+        position: 'relative'
     },
     content: {
         height: 'auto',
@@ -32,7 +36,7 @@ const styles = theme => ({
 });
 
 const Layout = props => {
-    const { controls, winner, players, classes } = props;
+    const { classes } = props;
 
     return (
         <div className={classes.root}>
@@ -50,12 +54,13 @@ const Layout = props => {
                 }}
             >
                 <div className={classes.toolbar} />
-                {controls}
+                <Input />
+                <Wildcard />
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                {winner}
-                {players}
+                <Winner />
+                <Table />
             </main>
         </div>
     );
@@ -67,10 +72,7 @@ Layout.propTypes = {
         drawerPaper: PropTypes.string,
         toolbar: PropTypes.string,
         content: PropTypes.string
-    }).isRequired,
-    controls: PropTypes.node.isRequired,
-    players: PropTypes.arrayOf(PropTypes.node),
-    winner: PropTypes.node
+    }).isRequired
 };
 
 export default withStyles(styles)(Layout);

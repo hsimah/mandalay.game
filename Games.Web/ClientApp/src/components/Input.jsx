@@ -1,17 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { actions } from '../flux';
 
 const Input = props => {
-    const { playerCount, startGame, started, onPlayerChange, resetGame } = props;
+    const { playerCount, startGame, started, resetGame, setPlayers } = props;
     const allowStart = !started && playerCount > 1 && playerCount <= 10;
     return <div>
         <TextField
             id='number'
-            label='Player Count'
-            value={playerCount}
-            onChange={onPlayerChange}
+            label='Enter number of players'
+            onChange={e => setPlayers(Number.parseInt(e.target.value || 0, 10))}
             type='number'
             InputLabelProps={{
                 shrink: true
@@ -47,4 +49,10 @@ Input.defaultProps = {
     started: false
 };
 
-export default Input;
+export default connect(
+    state => ({
+        playerCount: state.game.playerCount,
+        started: !!state.game.wildcard
+    }),
+    dispatch => bindActionCreators(actions, dispatch)
+)(Input);

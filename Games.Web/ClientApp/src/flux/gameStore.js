@@ -35,28 +35,29 @@ export const actions = {
     },
     dealCardToPlayer: () => async (dispatch, getState) => {
         const { game } = getState();
-        const { players, gameDeck, wildcard } = game;
-
-        if (players.filter(p => p.cards.length < 5).length) {
-            players.forEach(p => {
+        const { deal, players, gameDeck, wildcard } = game;
+        const dealtPlayers = players.map(p => {
+            if (p.cards.length < 5) {
                 const card = gameDeck.shift();
                 p.cards.push(card);
                 p.score = countCards(p.cards, wildcard);
-            });
-        }
-        const deal = players.filter(p => p.cards.length < 5).length;
+            }
+            return {
+                ...p
+            };
+        });
         dispatch({
             type: dealCard,
-            players,
+            players: dealtPlayers,
             gameDeck,
-            deal
+            deal: deal + 1
         });
     },
     startGame: () => async (dispatch, getState) => {
         const { app } = getState();
         const { deck } = app;
         const gameDeck = shuffle(deck);
-        const wildcard = gameDeck.pop();
+        const wildcard = gameDeck.splice(Math.floor(Math.random() * gameDeck.length), 1).pop();
         dispatch({
             type: startGame,
             gameDeck,
@@ -97,7 +98,7 @@ export const reducer = (state, action) => {
                 ...state,
                 gameDeck: action.gameDeck,
                 wildcard: action.wildcard,
-                deal: true
+                deal: 0
             };
         case setWinner:
             return {

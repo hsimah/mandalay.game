@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
@@ -18,4 +19,8 @@ Wildcard.defaultProps = {
     card: {}
 };
 
-export default Wildcard;
+export default connect(
+    state => ({
+        card: state.game.wildcard
+    })
+)(Wildcard);
