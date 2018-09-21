@@ -5,42 +5,42 @@ export const gameReducer = (state = initialState, action: Actions): State => {
     switch (action.type) {
         case ActionTypes.DEAL_CARD:
             return {
+                ...state,
                 round: {
+                    ...state.round,
                     deck: action.payload.deck,
-                    players: action.payload.players,
-                    ...state.round
-                },
-                ...state
+                    players: action.payload.players
+                }
             };
         case ActionTypes.RESET_GAME:
             return {
-                playerCount: state.playerCount,
-                ...initialState
+                ...initialState,
+                playerCount: state.playerCount
             };
         case ActionTypes.SET_PLAYERS:
             return {
                 playerCount: action.payload.playerCount,
                 round: {
-                    players: action.payload.players,
-                    ...state.round
+                    ...state.round,
+                    players: action.payload.players
                 }
             };
         case ActionTypes.SET_WINNER:
             return {
+                ...state,
                 round: {
-                    winner: action.payload.winner,
-                    ...state.round
+                    ...state.round,
+                    winner: action.payload.winner
                 },
-                ...state
             };
         case ActionTypes.START_GAME:
             return {
+                ...state,
                 round: {
+                    ...state.round,
                     deck: action.payload.deck,
-                    wildcard: action.payload.wildcard,
-                    ...state.round
-                },
-                ...state
+                    wildcard: action.payload.wildcard
+                }
             };
         default:
             return state;

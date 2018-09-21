@@ -8,21 +8,21 @@ export const appReducer = (state = initialState, action: Actions): State => {
                 ...state
             };
         case ActionTypes.RECEIVE_CARDS:
-            return {
+            return  {
+                ...state,
                 deck: action.payload.cards,
                 deckLoaded: action.payload.cards.length === 52,
-                ...state
             };
         case ActionTypes.SEND_ROUND:
             return {
+                ...initialState,
                 deck: state.deck,
-                deckLoaded: state.deckLoaded,
-                ...initialState
+                deckLoaded: state.deckLoaded
             };
         case ActionTypes.HANDLE_ERROR:
             return {
-                error: action.payload.error,
-                ...initialState
+                ...initialState,
+                error: action.payload.error
             };
         default:
             return state;
