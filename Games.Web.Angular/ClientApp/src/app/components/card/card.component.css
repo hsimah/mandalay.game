@@ -1,0 +1,9 @@
+.wrapper {
+    display: inline-block;
+    padding: 0.5em;
+}
+.card {
+    min-height: 244.64;
+    min-width: 169.075;
+    overflow: visible;
+}

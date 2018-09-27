@@ -1,5 +1,11 @@
 <div id="container">
   <router-outlet>
+    <div *ngIf="isLoading">
+      <app-loading></app-loading>
+    </div>
 
+    <div *ngIf="error">
+        <app-error></app-error>
+    </div>
   </router-outlet>
 </div>

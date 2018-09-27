@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
-import { DataService } from '../../services/data.service';
-import * as featureActions from './actions';
+import { Observable } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { shuffle } from 'lodash';
+
+import * as featureActions from './actions';
 
 import { State } from '../root-state';
 import { Player } from '../../models/player';
@@ -13,7 +13,7 @@ import { Card } from '../../models/card';
 
 @Injectable()
 export class GameStoreEffects {
-    constructor(private dataService: DataService, private actions$: Actions, private store$: Store<State>) { }
+    constructor(private actions$: Actions, private store$: Store<State>) { }
 
     private countCards(cards: Card[], wildcard: Card) {
         return cards.reduce((total, current) => {

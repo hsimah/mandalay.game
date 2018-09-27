@@ -1,31 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-// import { LoadingComponent } from './loading/loading.component';
-// import { ErrorComponent } from './error/error.component';
-// import { TableComponent } from './table/table.component';
-// import { CardComponent } from './card/card.component';
-// import { WildcardComponent } from './wildcard/wildcard.component';
-// import { HandComponent } from './hand/hand.component';
-// import { InputComponent } from './input/input.component';
-// import { WinnerComponent } from './winner/winner.component';
+
+import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './root-store/root-store.module';
+import { environment } from '../environments/environment';
+
+import { AppComponent } from './app.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { ErrorComponent } from './components/error/error.component';
+import { TableComponent } from './container/table/table.component';
+import { CardComponent } from './components/card/card.component';
+import { WildcardComponent } from './components/wildcard/wildcard.component';
+import { HandComponent } from './components/hand/hand.component';
+import { InputComponent } from './components/input/input.component';
+import { WinnerComponent } from './components/winner/winner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoadingComponent,
-    // ErrorComponent,
-    // TableComponent,
-    // CardComponent,
-    // WildcardComponent,
-    // HandComponent,
-    // InputComponent,
-    // WinnerComponent
+    LoadingComponent,
+    ErrorComponent,
+    TableComponent,
+    CardComponent,
+    WildcardComponent,
+    HandComponent,
+    InputComponent,
+    WinnerComponent
   ],
   imports: [
     BrowserModule,
