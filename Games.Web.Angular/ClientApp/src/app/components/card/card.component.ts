@@ -3,18 +3,23 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  @Input() rank: string;
-  @Input() suit: string;
+  @Input()
+  rank: string = "red";
+  @Input()
+  suit: string = "joker";
+  @Input()
+  back: boolean = false;
+  @Input()
+  rotate: boolean = false;
 
   private card: string = '';
 
-  constructor() {}
+  constructor() { }
 
   private mapSuit = (suit: string): string => {
-    console.log(suit)
     switch (suit) {
       case 'Clubs':
         return 'club';
@@ -43,6 +48,10 @@ export class CardComponent implements OnInit {
   };
 
   ngOnInit() {
+    if (this.back) {
+      this.card = 'back';
+      return;
+    }
     const suit: string = this.mapSuit(this.suit);
     const rank: string = this.mapRank(this.rank);
     this.card = `${suit}_${rank}`;

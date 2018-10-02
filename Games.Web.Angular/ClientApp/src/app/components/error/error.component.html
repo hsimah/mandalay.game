@@ -3,11 +3,9 @@
     <h1>Oh no!</h1>
     <p>Something went wrong. Refresh the page to try again.</p>
   </section>
-  <div class="container">
+  <div class="error-container">
     <div class="card-wrapper">
-      <svg class="card">
-        <use xlink:href="/assets/svg-cards.svg#back" />
-      </svg>
+      <app-card [back]="true"></app-card>
     </div>
   </div>
 </div>

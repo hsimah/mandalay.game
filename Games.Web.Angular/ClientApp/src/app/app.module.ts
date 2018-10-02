@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { RootStoreModule } from './root-store/root-store.module';
 import { environment } from '../environments/environment';
@@ -34,7 +35,11 @@ import { WinnerComponent } from './components/winner/winner.component';
     AppRoutingModule,
     HttpClientModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    RootStoreModule
+    RootStoreModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatInputModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
