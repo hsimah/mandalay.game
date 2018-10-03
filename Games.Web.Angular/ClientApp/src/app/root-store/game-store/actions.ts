@@ -1,11 +1,13 @@
 import { Action } from '@ngrx/store';
 import { Card } from '../../models/card';
 import { Player } from '../../models/player';
+import { Round } from '../../models/round';
 
 export enum ActionTypes {
     SET_PLAYER_COUNT = 'SET_PLAYER_COUNT',
     SET_PLAYERS = 'SET_PLAYERS',
     DEAL_CARD = 'DEAL_CARD',
+    UPDATE_HAND = 'UPDATE_HAND',
     START_GAME = 'START_GAME',
     SET_WINNER = 'SET_WINNER',
     RESET_GAME = 'RESET_GAME',
@@ -28,11 +30,12 @@ export class SetPlayersAction implements Action {
 
 export class DealCardAction implements Action {
     readonly type = ActionTypes.DEAL_CARD;
-    constructor(public payload: {
-        deck: Card[],
-        players: Player[],
-        deal: number
-    }) { }
+    constructor(public deal: number) { }
+}
+
+export class UpdateHandAction implements Action {
+    readonly type = ActionTypes.UPDATE_HAND;
+    constructor(public round: Round) { }
 }
 
 export class StartGameAction implements Action {
@@ -49,9 +52,7 @@ export class InitRoundAction implements Action {
 
 export class SetWinnerAction implements Action {
     readonly type = ActionTypes.SET_WINNER;
-    constructor(public payload: {
-        winner: Player
-    }) { }
+    constructor(public round: Round) { }
 }
 
 export class ResetGameAction implements Action {
@@ -65,6 +66,7 @@ export class ResetGameAction implements Action {
 export type Actions = SetPlayersAction |
     SetPlayerCountAction |
     DealCardAction |
+    UpdateHandAction |
     InitRoundAction |
     StartGameAction |
     SetWinnerAction |

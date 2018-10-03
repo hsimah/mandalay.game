@@ -3,13 +3,12 @@ import { initialState, State } from './state';
 
 export const gameReducer = (state = initialState, action: Actions): State => {
     switch (action.type) {
-        case ActionTypes.DEAL_CARD:
+        case ActionTypes.UPDATE_HAND:
             return {
                 ...state,
                 round: {
                     ...state.round,
-                    deck: action.payload.deck,
-                    players: action.payload.players
+                    ...action.round
                 }
             };
         case ActionTypes.RESET_GAME:
@@ -30,7 +29,6 @@ export const gameReducer = (state = initialState, action: Actions): State => {
                 ...state,
                 round: {
                     ...state.round,
-                    winner: action.payload.winner
                 },
             };
         case ActionTypes.INIT_ROUND:

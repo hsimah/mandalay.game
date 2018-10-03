@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatSidenavModule, MatButtonModule, MatInputModule, MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -39,6 +39,7 @@ import { WinnerComponent } from './components/winner/winner.component';
     MatSidenavModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule

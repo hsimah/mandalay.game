@@ -7,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input()
-  rank: string = "red";
+  rank: string = 'red';
   @Input()
-  suit: string = "joker";
+  suit: string = 'joker';
   @Input()
   back: boolean = false;
   @Input()

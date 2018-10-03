@@ -7,5 +7,6 @@ export interface Round {
   deck: Card[],
   winner?: Player,
   wildcard?: Card,
-  players: Player[]
+  players: Player[],
+  cardsDealt: number
 };

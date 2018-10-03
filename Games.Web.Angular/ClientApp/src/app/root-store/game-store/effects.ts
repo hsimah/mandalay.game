@@ -44,15 +44,6 @@ export class GameStoreEffects {
         }))
     )
 
-    // @Effect()
-    // initRound$: Observable<Action> = this.actions$.pipe(
-    //     ofType<featureActions.InitRoundAction>(featureActions.ActionTypes.INIT_ROUND),
-    //     withLatestFrom(this.store$),
-    //     map(([action, store]) => {
-
-    //     })
-    // )
-
     @Effect()
     startGameEffect$: Observable<Action> = this.actions$.pipe(
         ofType<featureActions.StartGameAction>(featureActions.ActionTypes.START_GAME),
@@ -60,11 +51,15 @@ export class GameStoreEffects {
         map(([action, store]) => {
             const shuffled = shuffle(store.app.deck);
             const wildcard = shuffled.splice(Math.floor(Math.random() * shuffled.length), 1).pop();
-            return new featureActions.InitRoundAction({
+            return {
                 deck: shuffled,
                 wildcard: wildcard
-            });
-        })
+            };
+        }),
+        switchMap(round => [
+            new featureActions.InitRoundAction(round),
+            new featureActions.DealCardAction(0)
+        ])
     );
 
     @Effect()
@@ -72,21 +67,27 @@ export class GameStoreEffects {
         ofType<featureActions.DealCardAction>(featureActions.ActionTypes.DEAL_CARD),
         withLatestFrom(this.store$),
         map(([action, store]) => {
-            const dealtPlayers: Player[] = action.payload.players.map(p => {
+            const round: Round = Object.assign({}, store.game.round);
+            const dealtPlayers: Player[] = round.players.map(p => {
                 if (p.hand.length < 5) {
-                    const card = store.game.round.deck.shift();
+                    const card = round.deck.shift();
                     p.hand.push(card);
-                    p.score = this.countCards(p.hand, store.game.round.wildcard);
+                    p.score = this.countCards(p.hand, round.wildcard);
                 }
                 return {
                     ...p
                 };
             });
-            return new featureActions.DealCardAction({
-                deck: [],
+            return {
+                ...round,
                 players: dealtPlayers,
-                deal: 1
-            });
-        })
+                deck: round.deck,
+                cardsDealt: action.deal + 1
+            };
+        }),
+        switchMap(round => [
+            new featureActions.UpdateHandAction(round),
+            round.cardsDealt === 5 ? new featureActions.SetWinnerAction(round) : new featureActions.DealCardAction(round.cardsDealt)
+        ])
     );
 }

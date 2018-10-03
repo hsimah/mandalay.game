@@ -1,0 +1,10 @@
+.player-hand {
+    display: flex;
+    flex-direction: row;
+    & .hand-card {
+        width: 190px;
+        & .hand-card-content {
+            min-height: 250px;
+        }
+    }
+}
