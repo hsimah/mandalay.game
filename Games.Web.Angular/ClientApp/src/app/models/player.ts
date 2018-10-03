@@ -1,7 +1,7 @@
 import { Card } from './card';
 
 export interface Player {
-  id: string,
+  id?: string,
   name: string,
   score: number,
   hand: Card[]

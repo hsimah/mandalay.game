@@ -19,7 +19,7 @@ export const gameReducer = (state = initialState, action: Actions): State => {
             };
         case ActionTypes.SET_PLAYERS:
             return {
-                playerCount: action.payload.playerCount,
+                playerCount: action.payload.players.length,
                 round: {
                     ...state.round,
                     players: action.payload.players
@@ -33,7 +33,7 @@ export const gameReducer = (state = initialState, action: Actions): State => {
                     winner: action.payload.winner
                 },
             };
-        case ActionTypes.START_GAME:
+        case ActionTypes.INIT_ROUND:
             return {
                 ...state,
                 round: {

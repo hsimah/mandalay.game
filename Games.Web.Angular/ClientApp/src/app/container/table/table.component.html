@@ -1,7 +1,12 @@
 <mat-sidenav-container fullscreen>
     <mat-sidenav class="sidename" mode="side" opened>
         <app-input></app-input>
-        <app-wildcard></app-wildcard>
+        <app-wildcard [card]="(wildcard$|async)"></app-wildcard>
     </mat-sidenav>
-    <mat-sidenav-content>This is where the game will go</mat-sidenav-content>
+    <mat-sidenav-content>
+        <div *ngFor="let player of this.players$ | async">
+            <app-hand [player]="player">
+            </app-hand>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>

@@ -7,7 +7,7 @@ export {
 } from './app-store.module';
 
 export {
-    AppStoreActions,
+  AppStoreActions,
   AppStoreSelectors,
   AppStoreState
 };

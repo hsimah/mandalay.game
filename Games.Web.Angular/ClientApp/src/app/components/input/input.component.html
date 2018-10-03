@@ -1,0 +1,11 @@
+<div id="input">
+  <mat-form-field>
+    <input matInput [formControl]="control" placeholder="Number of players" type="number" max="10" min="0" (change)="setPlayerCount(control.value)">
+  </mat-form-field>
+  <button mat-button (click)="startGame()">
+    Start game
+  </button>
+  <button mat-button>
+    Reset game
+  </button>
+</div>

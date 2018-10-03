@@ -1,0 +1,6 @@
+<div class="mat-typography">
+  <h2>{{player.name}}</h2>
+  <div *ngFor="let card of player.hand">
+    <app-card rank="{{card.rank}}" suit="{{card.suit}}"></app-card>
+  </div>
+</div>
