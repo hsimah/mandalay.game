@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map, withLatestFrom, switchMap } from 'rxjs/operators';
-import { shuffle } from 'lodash';
+import { shuffle, maxBy } from 'lodash';
 
 import * as featureActions from './actions';
 
@@ -39,9 +39,7 @@ export class GameStoreEffects {
         ofType<featureActions.SetPlayerCountAction>(
             featureActions.ActionTypes.SET_PLAYER_COUNT
         ),
-        map(action => new featureActions.SetPlayersAction({
-            players: this.generatePlayers(action.payload.playerCount)
-        }))
+        map(action => new featureActions.SetPlayersAction(this.generatePlayers(action.playerCount)))
     )
 
     @Effect()
@@ -87,7 +85,13 @@ export class GameStoreEffects {
         }),
         switchMap(round => [
             new featureActions.UpdateHandAction(round),
-            round.cardsDealt === 5 ? new featureActions.SetWinnerAction(round) : new featureActions.DealCardAction(round.cardsDealt)
+            round.cardsDealt === 5 ? new featureActions.FinishGameAction(round) : new featureActions.DealCardAction(round.cardsDealt)
         ])
+    );
+
+    @Effect()
+    setWinnerEffect$: Observable<Action> = this.actions$.pipe(
+        ofType<featureActions.FinishGameAction>(featureActions.ActionTypes.FINISH_GAME),
+        map(action => new featureActions.SetWinnerAction(maxBy(action.round.players, 'score')))
     );
 }

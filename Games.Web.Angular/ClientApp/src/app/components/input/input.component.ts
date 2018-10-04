@@ -28,13 +28,15 @@ export class InputComponent implements OnInit {
   }
 
   setPlayerCount(playerCount: number) {
-    this.store$.dispatch(new GameStoreActions.SetPlayerCountAction({
-      playerCount: playerCount
-    }))
+    this.store$.dispatch(new GameStoreActions.SetPlayerCountAction(playerCount));
   }
 
   startGame() {
     this.store$.dispatch(new GameStoreActions.StartGameAction());
+  }
+
+  resetGame() {
+    this.store$.dispatch(new GameStoreActions.ResetGameAction());
   }
 
 }

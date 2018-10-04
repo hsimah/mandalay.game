@@ -11,6 +11,7 @@ export const initialState: State = {
         deck : [],
         winner: null,
         wildcard: null,
-        players: []
+        players: [],
+        cardsDealt: 0
     }
 }

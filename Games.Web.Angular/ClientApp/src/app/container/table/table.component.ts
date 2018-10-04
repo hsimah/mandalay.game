@@ -14,10 +14,14 @@ import { Card } from '../../models/card';
 export class TableComponent implements OnInit {
   players$: Observable<Player[]>;
   wildcard$: Observable<Card>;
+  winner$: Observable<Player>;
 
   constructor(private store$: Store<RootStoreState.State>) { }
 
   ngOnInit() {
+    this.winner$ = this.store$.select(
+      RootStoreSelectors.selectGameWinner
+    );
     this.players$ = this.store$.select(
       RootStoreSelectors.selectGamePlayers
     );
