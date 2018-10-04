@@ -6,7 +6,7 @@
       <mat-card class="hand-card">
         <mat-card-header>
           <mat-card-title>{{card.rank}} of {{card.suit}}</mat-card-title>
-          <mat-card-subtitle>Value: {{card.value}}</mat-card-subtitle>
+          <mat-card-subtitle>Value: {{card.suit === wild ? card.value * 2 : card.value}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="hand-card-content">
           <app-card rank="{{card.rank}}" suit="{{card.suit}}"></app-card>

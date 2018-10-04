@@ -11,6 +11,9 @@ export class HandComponent implements OnInit {
   @Input()
   player: Player;
 
+  @Input()
+  wild: string;
+
   constructor() { }
 
   ngOnInit() {

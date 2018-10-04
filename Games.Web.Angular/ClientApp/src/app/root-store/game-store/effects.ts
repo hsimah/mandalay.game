@@ -18,7 +18,8 @@ export class GameStoreEffects {
 
     private countCards(cards: Card[], wildcard: Card) {
         return cards.reduce((total, current) => {
-            return total += current.suit === wildcard.suit ? current.value * 2 : current.value;
+            const samesame = current.suit === wildcard.suit;
+            return total += samesame ? current.value * 2 : current.value;
         }, 0);
     }
 

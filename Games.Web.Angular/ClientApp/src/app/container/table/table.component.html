@@ -6,7 +6,7 @@
     <mat-sidenav-content class="main-content">
         <app-winner [winner]="winner$ | async"></app-winner>
         <div *ngFor="let player of players$ | async">
-            <app-hand [player]="player"></app-hand>
+            <app-hand [player]="player" [wild]="(wildcard$ | async)?.suit"></app-hand>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
