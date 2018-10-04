@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DataService } from '../../services/data.service';
-import * as featureActions from './actions';
+import * as AppStoreActions from './actions';
 import { Card } from '../../models/card';
 
 const suits: string[] = [
@@ -30,27 +30,27 @@ export class AppStoreEffects {
 
     @Effect()
     requestCardEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.RequestCardsAction>(
-            featureActions.ActionTypes.REQUEST_CARDS
+        ofType<AppStoreActions.RequestCardsAction>(
+            AppStoreActions.ActionTypes.REQUEST_CARDS
         ),
-        startWith(new featureActions.RequestCardsAction()),
+        startWith(new AppStoreActions.RequestCardsAction()),
         switchMap(action => this.dataService.getCards()
             .pipe(
-                map(cards => new featureActions.ReceiveCardsAction({ cards: buildDeck(cards) })),
-                catchError(error => observableOf(new featureActions.HandleErrorAction({ error })))
+                map(cards => new AppStoreActions.ReceiveCardsAction({ cards: buildDeck(cards) })),
+                catchError(error => observableOf(new AppStoreActions.HandleErrorAction({ error })))
             )
         )
     );
 
     @Effect()
     sendRoundEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.SendRoundAction>(
-            featureActions.ActionTypes.SEND_ROUND
+        ofType<AppStoreActions.SendRoundAction>(
+            AppStoreActions.ActionTypes.SEND_ROUND
         ),
         switchMap(action => this.dataService.postRound(action.round)
             .pipe(
-                map(() => new featureActions.RoundSentAction()),
-                catchError(error => observableOf(new featureActions.HandleErrorAction({ error })))
+                map(() => new AppStoreActions.RoundSentAction()),
+                catchError(error => observableOf(new AppStoreActions.HandleErrorAction({ error })))
             )
         )
     );

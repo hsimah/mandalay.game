@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-
 import { Card } from '../../models/card';
 import { Round } from '../../models/round';
 

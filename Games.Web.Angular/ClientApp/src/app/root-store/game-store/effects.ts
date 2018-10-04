@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, withLatestFrom, switchMap } from 'rxjs/operators';
 import { shuffle, maxBy } from 'lodash';
-
-import * as featureActions from './actions';
-
+import * as GameStoreActions from './actions';
+import { AppStoreActions } from '../app-store';
 import { State } from '../root-state';
 import { Player } from '../../models/player';
 import { Card } from '../../models/card';
 import { Round } from '../../models/round';
-import { AppStoreActions } from '../app-store';
 
 @Injectable()
 export class GameStoreEffects {
@@ -38,15 +36,15 @@ export class GameStoreEffects {
 
     @Effect()
     setPlayersEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.SetPlayerCountAction>(
-            featureActions.ActionTypes.SET_PLAYER_COUNT
+        ofType<GameStoreActions.SetPlayerCountAction>(
+            GameStoreActions.ActionTypes.SET_PLAYER_COUNT
         ),
-        map(action => new featureActions.SetPlayersAction(this.generatePlayers(action.playerCount)))
+        map(action => new GameStoreActions.SetPlayersAction(this.generatePlayers(action.playerCount)))
     )
 
     @Effect()
     startGameEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.StartGameAction>(featureActions.ActionTypes.START_GAME),
+        ofType<GameStoreActions.StartGameAction>(GameStoreActions.ActionTypes.START_GAME),
         withLatestFrom(this.store$),
         map(([action, store]) => {
             const shuffled = shuffle(store.app.deck);
@@ -57,14 +55,14 @@ export class GameStoreEffects {
             };
         }),
         switchMap(round => [
-            new featureActions.InitRoundAction(round),
-            new featureActions.DealCardAction(0)
+            new GameStoreActions.InitRoundAction(round),
+            new GameStoreActions.DealCardAction(0)
         ])
     );
 
     @Effect()
     dealHandEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.DealCardAction>(featureActions.ActionTypes.DEAL_CARD),
+        ofType<GameStoreActions.DealCardAction>(GameStoreActions.ActionTypes.DEAL_CARD),
         withLatestFrom(this.store$),
         map(([action, store]) => {
             const round: Round = Object.assign({}, store.game.round);
@@ -86,20 +84,20 @@ export class GameStoreEffects {
             };
         }),
         switchMap(round => [
-            new featureActions.UpdateHandAction(round),
-            round.cardsDealt === 5 ? new featureActions.FinishGameAction(round) : new featureActions.DealCardAction(round.cardsDealt)
+            new GameStoreActions.UpdateHandAction(round),
+            round.cardsDealt === 5 ? new GameStoreActions.FinishGameAction(round) : new GameStoreActions.DealCardAction(round.cardsDealt)
         ])
     );
 
     @Effect()
     setWinnerEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<featureActions.FinishGameAction>(featureActions.ActionTypes.FINISH_GAME),
+        ofType<GameStoreActions.FinishGameAction>(GameStoreActions.ActionTypes.FINISH_GAME),
         map(action => ({
             ...action.round,
             winner: maxBy(action.round.players, 'score')
         })),
         switchMap(round => [
-            new featureActions.SetWinnerAction(round.winner),
+            new GameStoreActions.SetWinnerAction(round.winner),
             new AppStoreActions.SendRoundAction(round)
         ])
     );

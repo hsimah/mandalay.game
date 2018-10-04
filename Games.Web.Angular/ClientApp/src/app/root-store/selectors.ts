@@ -18,7 +18,6 @@ export const selectIsLoading: MemoizedSelector<object, boolean> = createSelector
 export const selectAppState: MemoizedSelector<object, State> = AppStoreSelectors.selectAppState;
 export const selectAppDeck: MemoizedSelector<object, Card[]> = AppStoreSelectors.selectAppDeck;
 
-export const selectGameDeck: MemoizedSelector<object, Card[]> = GameStoreSelectors.selectGameDeck;
 export const selectGamePlayers: MemoizedSelector<object, Player[]> = GameStoreSelectors.selectGamePlayers;
 export const selectGameWildcard: MemoizedSelector<object, Card> = GameStoreSelectors.selectGameWildcard;
 export const selectGameWinner: MemoizedSelector<object, Player> = GameStoreSelectors.selectGameWinner;

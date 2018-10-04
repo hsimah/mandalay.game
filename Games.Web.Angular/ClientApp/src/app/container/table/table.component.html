@@ -1,6 +1,6 @@
 <mat-sidenav-container fullscreen>
     <mat-sidenav class="side-nav" mode="side" opened>
-        <app-input></app-input>
+        <app-input [playerCount]="playerCount | async"></app-input>
         <app-wildcard [card]="wildcard$ | async"></app-wildcard>
     </mat-sidenav>
     <mat-sidenav-content class="main-content">

@@ -5,7 +5,6 @@ import { RootStoreState, RootStoreSelectors } from '../../root-store';
 import { Player } from '../../models/player';
 import { Card } from '../../models/card';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -15,6 +14,7 @@ export class TableComponent implements OnInit {
   players$: Observable<Player[]>;
   wildcard$: Observable<Card>;
   winner$: Observable<Player>;
+  playerCount$: Observable<number>;
 
   constructor(private store$: Store<RootStoreState.State>) { }
 
@@ -27,6 +27,9 @@ export class TableComponent implements OnInit {
     );
     this.wildcard$ = this.store$.select(
       RootStoreSelectors.selectGameWildcard
+    );
+    this.playerCount$ = this.store$.select(
+      RootStoreSelectors.selectGamePlayerCount
     );
   }
 

@@ -1,9 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootStoreState, GameStoreActions } from '../../root-store';
 import { FormControl } from '@angular/forms';
-import { GameStoreEffects } from '../../root-store/game-store/effects';
-import { Player } from '../../models/player';
 
 @Component({
   selector: 'app-input',
@@ -13,15 +11,10 @@ import { Player } from '../../models/player';
 export class InputComponent implements OnInit {
   control: FormControl = new FormControl('');
 
-  @Output()
-  add = new EventEmitter();
-
   @Input()
-  public set reset(value: boolean) {
-    value && this.control.reset();
-  }
+  playerCount: number;
 
-  constructor(private store$: Store<RootStoreState.State>, private effects$: GameStoreEffects) { }
+  constructor(private store$: Store<RootStoreState.State>) { }
 
   ngOnInit() {
 
