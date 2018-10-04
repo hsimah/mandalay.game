@@ -1,0 +1,6 @@
+<div *ngIf="card;else back">
+  <app-card [suit]="card.suit" [rank]="card.rank"></app-card>
+</div>
+<ng-template #back>
+  <app-card [back]="true"></app-card>
+</ng-template>

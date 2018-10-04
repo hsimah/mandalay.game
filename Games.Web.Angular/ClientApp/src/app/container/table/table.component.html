@@ -1,0 +1,12 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav class="side-nav" mode="side" opened>
+        <app-input [playerCount]="playerCount | async"></app-input>
+        <app-wildcard [card]="wildcard$ | async"></app-wildcard>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+        <app-winner [winner]="winner$ | async"></app-winner>
+        <div *ngFor="let player of players$ | async">
+            <app-hand [player]="player" [wild]="(wildcard$ | async)?.suit"></app-hand>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

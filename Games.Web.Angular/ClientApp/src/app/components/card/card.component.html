@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <svg class="card">
+    <animateTransform *ngIf="rotate" attributeName='transform' attributeType='XML' type='rotate' from='0 0 0' to='360 0 0'
+      dur='6s' repeatCount='indefinite' />
+    <use attr.xlink:href="/assets/svg-cards.svg#{{this.card}}" />
+  </svg>
+</div>
