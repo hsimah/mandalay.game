@@ -11,6 +11,7 @@ import { State } from '../root-state';
 import { Player } from '../../models/player';
 import { Card } from '../../models/card';
 import { Round } from '../../models/round';
+import { AppStoreActions } from '../app-store';
 
 @Injectable()
 export class GameStoreEffects {
@@ -93,6 +94,13 @@ export class GameStoreEffects {
     @Effect()
     setWinnerEffect$: Observable<Action> = this.actions$.pipe(
         ofType<featureActions.FinishGameAction>(featureActions.ActionTypes.FINISH_GAME),
-        map(action => new featureActions.SetWinnerAction(maxBy(action.round.players, 'score')))
+        map(action => ({
+            ...action.round,
+            winner: maxBy(action.round.players, 'score')
+        })),
+        switchMap(round => [
+            new featureActions.SetWinnerAction(round.winner),
+            new AppStoreActions.SendRoundAction(round)
+        ])
     );
 }

@@ -14,7 +14,7 @@ export class DataService {
     getCards(): Observable<Card[]> {
         return this.http.get<Card[]>('/api/card');
     }
-    postRound(round: Round) {
-        this.http.post('/api/round', round);
+    postRound(round: Round): Observable<Object> {
+        return this.http.post('/api/round', round);
     }
 }

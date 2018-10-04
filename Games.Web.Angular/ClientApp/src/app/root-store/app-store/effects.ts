@@ -41,4 +41,17 @@ export class AppStoreEffects {
             )
         )
     );
+
+    @Effect()
+    sendRoundEffect$: Observable<Action> = this.actions$.pipe(
+        ofType<featureActions.SendRoundAction>(
+            featureActions.ActionTypes.SEND_ROUND
+        ),
+        switchMap(action => this.dataService.postRound(action.round)
+            .pipe(
+                map(() => new featureActions.RoundSentAction()),
+                catchError(error => observableOf(new featureActions.HandleErrorAction({ error })))
+            )
+        )
+    );
 }
